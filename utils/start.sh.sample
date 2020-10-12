@@ -209,6 +209,10 @@ then
     --restart=unless-stopped \
     $IMS_NAMESPACE/ims:$IMS_VERSION > /dev/null
 
+    if [ -e "${PWD}/artifacts/IMS.war" ]; then
+        docker cp "${PWD}/artifacts/IMS.war" ${INSTANCE_PREFIX}ims:/var/lib/tomcat7/webapps/ROOT.war
+    fi
+
     docker cp "${PWD}/configs/ims/ims-config.groovy" ${INSTANCE_PREFIX}ims:/usr/share/tomcat7/.grails/ims-config.groovy
     docker cp "${PWD}/hosts/ims/addHosts.sh" ${INSTANCE_PREFIX}ims:/tmp/addHosts.sh
     docker start ${INSTANCE_PREFIX}ims
@@ -225,6 +229,14 @@ then
     --restart=unless-stopped \
     $CORE_NAMESPACE/core:$CORE_VERSION > /dev/null
 
+    if [ -e "${PWD}/artifacts/core.war" ]; then
+        docker cp "${PWD}/artifacts/core.war" ${INSTANCE_PREFIX}core:/var/lib/tomcat7/webapps/ROOT.war
+    fi
+
+    if [ -e "${PWD}/artifacts/restapidoc.json" ]; then
+        docker cp "${PWD}/artifacts/restapidoc.json" ${INSTANCE_PREFIX}core:/var/lib/tomcat7/restapidoc.json
+    fi
+
     docker cp "${PWD}/configs/core/cytomineconfig.groovy" ${INSTANCE_PREFIX}core:/usr/share/tomcat7/.grails/cytomineconfig.groovy
     docker cp "${PWD}/hosts/core/addHosts.sh" ${INSTANCE_PREFIX}core:/tmp/addHosts.sh
     docker start ${INSTANCE_PREFIX}core
@@ -237,6 +249,10 @@ then
     -v /etc/localtime:/etc/localtime \
     --restart=unless-stopped \
     $WEB_UI_NAMESPACE/web-ui:$WEB_UI_VERSION > /dev/null
+
+    if [ -e "${PWD}/artifacts/web-ui" ]; then
+    	docker cp "${PWD}/artifacts/web-ui/." ${INSTANCE_PREFIX}webUI:/app
+    fi
 
     docker cp "${PWD}/configs/web-ui/configuration.json" ${INSTANCE_PREFIX}webUI:/app/configuration.json
     docker cp "${PWD}/configs/web-ui/nginx.conf" ${INSTANCE_PREFIX}webUI:/etc/nginx/nginx.conf
