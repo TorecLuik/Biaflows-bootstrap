@@ -130,6 +130,10 @@ SOFTWARE_ENABLED=true
 RABBITMQ_LOGIN="router"
 RABBITMQ_PASSWORD="router"
 SLURM_VOLUME=slurm_data
+GITHUB_USERNAME=""
+GITHUB_TOKEN=""
+DOCKERHUB_USERNAME=""
+DOCKERHUB_PASSWORD=""
 
 #-------------------------------------------------------------------------------
 # HTTPS FOR PUBLIC URLS

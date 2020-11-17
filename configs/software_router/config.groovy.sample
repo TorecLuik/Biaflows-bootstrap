@@ -9,11 +9,24 @@ cytomine.core.privateKey='$RABBITMQ_PRIV_KEY'
 
 cytomine.software.communication.exchange="exchangeCommunication"
 cytomine.software.communication.queue="queueCommunication"
-cytomine.software.descriptorFile="descriptor.json"
-cytomine.software.ssh.maxRetries=3
-cytomine.software.repositoryManagerRefreshRate=300
 
 cytomine.software.path.softwareSources='/tmp/code'
 cytomine.software.path.softwareImages='$SOFTWARE_DOCKER_IMAGES_PATH'
-cytomine.software.jobs='/tmp/jobs'
+cytomine.software.path.jobs='/tmp/jobs'
 cytomine.software.sshKeysFile='$SERVER_SSHKEYS_PATH/id_rsa'
+cytomine.software.descriptorFile="descriptor.json"
+
+cytomine.software.ssh.maxRetries = 3
+cytomine.core.connectionRetries = 20
+
+// In seconds
+cytomine.software.repositoryManagerRefreshRate = 60
+cytomine.software.job.logRefreshRate = 10
+cytomine.software.pullingCheckRefreshRate = 20
+cytomine.software.pullingCheckTimeout = 1800
+cytomine.core.connectionRefreshRate = 30
+
+cytomine.software.github.username='$GITHUB_USERNAME'
+cytomine.software.github.token='$GITHUB_TOKEN'
+cytomine.software.dockerhub.username='$DOCKERHUB_USERNAME'
+cytomine.software.dockerhub.password='$DOCKERHUB_PASSWORD'
