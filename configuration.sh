@@ -40,7 +40,7 @@ SERVER_SSHKEYS_PATH=/biaflows/data/ssh
 BIAFLOWS_WORKFLOWS_METRICS=false
 
 # Upload to BIAFLOWS resulting annotations produced by workflow executions
-BIAFLOWS_WORKFLOWS_EXPORT=true
+BIAFLOWS_WORKFLOWS_ANNOTATIONS=true
 
 ###############################################################################
 ###############################################################################
