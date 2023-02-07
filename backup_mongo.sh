@@ -27,9 +27,9 @@ else
 fi
 
 return=0
-docker exec ${INSTANCE_PREFIX}mongodb mongodump -h localhost -o /BU && message="Backup OK. " || (message="Backup failed. " && return=1)
-docker cp ${INSTANCE_PREFIX}mongodb:/BU $NAME && message=$message"Copy OK. " || (message=$message"Copy failed. " && return=1)
-docker exec ${INSTANCE_PREFIX}mongodb rm -rf /BU && message=$message"Deletion OK. " || (message=$message"Deletion failed. " && return=1)
+podman exec ${INSTANCE_PREFIX}mongodb mongodump -h localhost -o /BU && message="Backup OK. " || (message="Backup failed. " && return=1)
+podman cp ${INSTANCE_PREFIX}mongodb:/BU $NAME && message=$message"Copy OK. " || (message=$message"Copy failed. " && return=1)
+podman exec ${INSTANCE_PREFIX}mongodb rm -rf /BU && message=$message"Deletion OK. " || (message=$message"Deletion failed. " && return=1)
 
 if [ $return -gt 0 ]
   then

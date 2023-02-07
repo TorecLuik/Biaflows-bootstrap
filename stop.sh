@@ -18,90 +18,90 @@
 
 echo "Stopping Cytomine... Data will be preserved in databases."
 
-docker stop ${INSTANCE_PREFIX}memcached
-docker rm -v ${INSTANCE_PREFIX}memcached
+podman stop ${INSTANCE_PREFIX}memcached
+podman rm -v ${INSTANCE_PREFIX}memcached
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}rabbitmq)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}rabbitmq)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}rabbitmq
-    docker rm -v ${INSTANCE_PREFIX}rabbitmq
+    podman stop ${INSTANCE_PREFIX}rabbitmq
+    podman rm -v ${INSTANCE_PREFIX}rabbitmq
 fi
 
-docker stop ${INSTANCE_PREFIX}mongodb
-docker rm -v ${INSTANCE_PREFIX}mongodb
-docker stop ${INSTANCE_PREFIX}postgresql
-docker rm -v ${INSTANCE_PREFIX}postgresql
+podman stop ${INSTANCE_PREFIX}mongodb
+podman rm -v ${INSTANCE_PREFIX}mongodb
+podman stop ${INSTANCE_PREFIX}postgresql
+podman rm -v ${INSTANCE_PREFIX}postgresql
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}backup_mongo)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}backup_mongo)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}backup_mongo
-    docker rm -v ${INSTANCE_PREFIX}backup_mongo
+    podman stop ${INSTANCE_PREFIX}backup_mongo
+    podman rm -v ${INSTANCE_PREFIX}backup_mongo
 fi
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}backup_postgis)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}backup_postgis)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}backup_postgis
-    docker rm -v ${INSTANCE_PREFIX}backup_postgis
+    podman stop ${INSTANCE_PREFIX}backup_postgis
+    podman rm -v ${INSTANCE_PREFIX}backup_postgis
 fi
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}retrieval)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}retrieval)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}retrieval
-    docker rm -v ${INSTANCE_PREFIX}retrieval
+    podman stop ${INSTANCE_PREFIX}retrieval
+    podman rm -v ${INSTANCE_PREFIX}retrieval
 fi
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}iipJP2)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}iipJP2)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}iipJP2
-    docker rm -v ${INSTANCE_PREFIX}iipJP2
+    podman stop ${INSTANCE_PREFIX}iipJP2
+    podman rm -v ${INSTANCE_PREFIX}iipJP2
 fi
 
-docker stop ${INSTANCE_PREFIX}iipCyto
-docker rm -v ${INSTANCE_PREFIX}iipCyto
+podman stop ${INSTANCE_PREFIX}iipCyto
+podman rm -v ${INSTANCE_PREFIX}iipCyto
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}bioformat)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}bioformat)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}bioformat
-    docker rm -v ${INSTANCE_PREFIX}bioformat
+    podman stop ${INSTANCE_PREFIX}bioformat
+    podman rm -v ${INSTANCE_PREFIX}bioformat
 fi
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}ims)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}ims)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}ims
-    docker rm -v ${INSTANCE_PREFIX}ims
+    podman stop ${INSTANCE_PREFIX}ims
+    podman rm -v ${INSTANCE_PREFIX}ims
 fi
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}core)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}core)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}core
-    docker rm -v ${INSTANCE_PREFIX}core
+    podman stop ${INSTANCE_PREFIX}core
+    podman rm -v ${INSTANCE_PREFIX}core
 fi
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}webUI)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}webUI)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}webUI
-    docker rm -v ${INSTANCE_PREFIX}webUI
+    podman stop ${INSTANCE_PREFIX}webUI
+    podman rm -v ${INSTANCE_PREFIX}webUI
 fi
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}iris)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}iris)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}iris
-    docker rm -v ${INSTANCE_PREFIX}iris
+    podman stop ${INSTANCE_PREFIX}iris
+    podman rm -v ${INSTANCE_PREFIX}iris
 fi
 
-docker stop ${INSTANCE_PREFIX}nginx
-docker rm -v ${INSTANCE_PREFIX}nginx
+podman stop ${INSTANCE_PREFIX}nginx
+podman rm -v ${INSTANCE_PREFIX}nginx
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}software_router)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}software_router)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}software_router
-    docker rm -v ${INSTANCE_PREFIX}software_router
+    podman stop ${INSTANCE_PREFIX}software_router
+    podman rm -v ${INSTANCE_PREFIX}software_router
 fi
 
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}slurm)" ]]
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}slurm)" ]]
 then
-    docker stop ${INSTANCE_PREFIX}slurm
-    docker rm -v ${INSTANCE_PREFIX}slurm
+    podman stop ${INSTANCE_PREFIX}slurm
+    podman rm -v ${INSTANCE_PREFIX}slurm
 fi
 
 echo "Done."

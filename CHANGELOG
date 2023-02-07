@@ -1,3 +1,5 @@
+02-2023 :
+ - Use Podman instead of Docker to setup
 10-01-2019 :
  - Renamed clean_docker_keep_data.sh to stop.sh
  - Renamed start_deploy.sh to start.sh

@@ -27,9 +27,9 @@ else
 fi
 
 return=0
-docker exec -e PGPASSWORD="docker" ${INSTANCE_PREFIX}postgresql pg_dump -h localhost -U docker  -f BU.sql docker && message="Backup OK. " || (message="Backup failed. " && return=1)
-docker cp ${INSTANCE_PREFIX}postgresql:/BU.sql $NAME && message=$message"Copy OK. " || (message=$message"Copy failed. " && return=1)
-docker exec ${INSTANCE_PREFIX}postgresql rm /BU.sql && message=$message"Deletion OK. " || (message=$message"Deletion failed. " && return=1)
+podman exec -e PGPASSWORD="docker" ${INSTANCE_PREFIX}postgresql pg_dump -h localhost -U docker  -f BU.sql docker && message="Backup OK. " || (message="Backup failed. " && return=1)
+podman cp ${INSTANCE_PREFIX}postgresql:/BU.sql $NAME && message=$message"Copy OK. " || (message=$message"Copy failed. " && return=1)
+podman exec ${INSTANCE_PREFIX}postgresql rm /BU.sql && message=$message"Deletion OK. " || (message=$message"Deletion failed. " && return=1)
 
 if [ $return -gt 0 ]
   then

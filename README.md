@@ -12,6 +12,7 @@
 
 This bootstrap procedure allows you to configure your installation and generate an installer script based on this configuration. 
 All Cytomine components run in Docker containers so that the only requirement is Docker.
+But now we run through Podman, which can use Docker containers. However, you need to have Podman installed.
 
 
 ## Install

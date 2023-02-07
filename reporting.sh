@@ -24,22 +24,22 @@ cp -r ./configs $DIR/configs
 cp -r ./hosts $DIR/hosts
 cp ./configuration-versions.sh $DIR/configuration-versions.sh
 
-docker logs ${INSTANCE_PREFIX}nginx &> $DIR/log-nginx.out
-docker logs ${INSTANCE_PREFIX}memcached &> $DIR/log-memcached.out
-docker logs ${INSTANCE_PREFIX}mongodb &> $DIR/log-mongodb.out
-docker logs ${INSTANCE_PREFIX}postgresql &> $DIR/log-postgresql.out
-docker logs ${INSTANCE_PREFIX}iipCyto &> $DIR/log-iipCyto.out
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}rabbitmq)" ]]; then docker logs ${INSTANCE_PREFIX}rabbitmq &> $DIR/log-rabbitmq.out; fi
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}backup_mongo)" ]]; then docker logs ${INSTANCE_PREFIX}backup_mongo &> $DIR/log-backup_mongo.out; fi
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}backup_postgis)" ]]; then docker logs ${INSTANCE_PREFIX}backup_postgis &> $DIR/log-backup_postgis.out; fi
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}retrieval)" ]]; then docker logs ${INSTANCE_PREFIX}retrieval &> $DIR/log-retrieval.out; fi
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}iipJP2)" ]]; then docker logs ${INSTANCE_PREFIX}iipJP2 &> $DIR/log-iipJP2.out; fi
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}bioformat)" ]]; then docker logs ${INSTANCE_PREFIX}bioformat &> $DIR/log-bioformat.out; fi
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}ims)" ]]; then docker logs ${INSTANCE_PREFIX}ims &> $DIR/log-ims.out; fi
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}core)" ]]; then docker logs ${INSTANCE_PREFIX}core &> $DIR/log-core.out; fi
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}iris)" ]]; then docker logs ${INSTANCE_PREFIX}iris &> $DIR/log-iris.out; fi
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}software_router)" ]]; then docker logs ${INSTANCE_PREFIX}software_router &> $DIR/log-software_router.out; fi
-if [[ "$(docker ps -q -f name=${INSTANCE_PREFIX}slurm)" ]]; then docker logs ${INSTANCE_PREFIX}slurm &> $DIR/log-slurm.out; fi
+podman logs ${INSTANCE_PREFIX}nginx &> $DIR/log-nginx.out
+podman logs ${INSTANCE_PREFIX}memcached &> $DIR/log-memcached.out
+podman logs ${INSTANCE_PREFIX}mongodb &> $DIR/log-mongodb.out
+podman logs ${INSTANCE_PREFIX}postgresql &> $DIR/log-postgresql.out
+podman logs ${INSTANCE_PREFIX}iipCyto &> $DIR/log-iipCyto.out
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}rabbitmq)" ]]; then podman logs ${INSTANCE_PREFIX}rabbitmq &> $DIR/log-rabbitmq.out; fi
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}backup_mongo)" ]]; then podman logs ${INSTANCE_PREFIX}backup_mongo &> $DIR/log-backup_mongo.out; fi
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}backup_postgis)" ]]; then podman logs ${INSTANCE_PREFIX}backup_postgis &> $DIR/log-backup_postgis.out; fi
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}retrieval)" ]]; then podman logs ${INSTANCE_PREFIX}retrieval &> $DIR/log-retrieval.out; fi
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}iipJP2)" ]]; then podman logs ${INSTANCE_PREFIX}iipJP2 &> $DIR/log-iipJP2.out; fi
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}bioformat)" ]]; then podman logs ${INSTANCE_PREFIX}bioformat &> $DIR/log-bioformat.out; fi
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}ims)" ]]; then podman logs ${INSTANCE_PREFIX}ims &> $DIR/log-ims.out; fi
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}core)" ]]; then podman logs ${INSTANCE_PREFIX}core &> $DIR/log-core.out; fi
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}iris)" ]]; then podman logs ${INSTANCE_PREFIX}iris &> $DIR/log-iris.out; fi
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}software_router)" ]]; then podman logs ${INSTANCE_PREFIX}software_router &> $DIR/log-software_router.out; fi
+if [[ "$(podman ps -q -f name=${INSTANCE_PREFIX}slurm)" ]]; then podman logs ${INSTANCE_PREFIX}slurm &> $DIR/log-slurm.out; fi
 ${INSTANCE_PREFIX}
 tar -zcvf $DIR.tar.gz $DIR
 rm -r $DIR
