@@ -334,7 +334,7 @@ then
     --privileged \
     -v $SLURM_VOLUME:/var/lib/mysql:Z \
     -v $SERVER_SSHKEYS_PATH:$SERVER_SSHKEYS_PATH:Z \
-    -v $SOFTWARE_podman_IMAGES_PATH:$SOFTWARE_podman_IMAGES_PATH:Z \
+    -v $SOFTWARE_DOCKER_IMAGES_PATH:$SOFTWARE_DOCKER_IMAGES_PATH:Z \
     -e SERVER_SSHKEYS_FILE=$SERVER_SSHKEYS_FILE \
     -p 10022:22 \
     --restart=unless-stopped \
@@ -351,7 +351,7 @@ then
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=software_router \
     --privileged \
-    -v $SOFTWARE_podman_IMAGES_PATH:$SOFTWARE_podman_IMAGES_PATH:Z \
+    -v $SOFTWARE_DOCKER_IMAGES_PATH:$SOFTWARE_DOCKER_IMAGES_PATH:Z \
     -v $SERVER_SSHKEYS_PATH:$SERVER_SSHKEYS_PATH:Z \
     --restart=unless-stopped \
     -p 22 \
