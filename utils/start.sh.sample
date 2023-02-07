@@ -99,7 +99,7 @@ podman create --name ${INSTANCE_PREFIX}postgresql \
 --network ${INSTANCE_PREFIX}biaflows-net \
 --network-alias=postgresql \
 -p 5432:5432 \
--v $POSTGRESQL_VOLUME:/var/lib/postgresql/data \
+-v $POSTGRESQL_VOLUME:/var/lib/postgresql/data:Z \
 -e PGDATA=/var/lib/postgresql/data/db-files/ \
 --restart=unless-stopped \
 $POSTGRES_NAMESPACE/postgres:$POSTGRES_VERSION postgres -c 'config_file=/tmp/postgresql.conf' > /dev/null
@@ -115,7 +115,7 @@ podman run -d \
 --name ${INSTANCE_PREFIX}mongodb \
 --network ${INSTANCE_PREFIX}biaflows-net \
 --network-alias=mongodb \
--v $MONGODB_VOLUME:/data/db \
+-v $MONGODB_VOLUME:/data/db:Z \
 --restart=unless-stopped \
 $MONGODB_NAMESPACE/mongodb:$MONGODB_VERSION > /dev/null
 
@@ -128,7 +128,7 @@ then
 	podman run -d --name ${INSTANCE_PREFIX}backup_postgis \
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=backup_postgis \
-    -v $BACKUP_PATH/postgis:/backup --restart=unless-stopped \
+    -v $BACKUP_PATH/postgis:/backup:Z --restart=unless-stopped \
 	-e SENDER_EMAIL=$SENDER_EMAIL \
 	-e SENDER_EMAIL_PASS=$SENDER_EMAIL_PASS \
 	-e SENDER_EMAIL_SMTP_HOST=$SENDER_EMAIL_SMTP_HOST \
@@ -149,7 +149,7 @@ then
 	podman run -d --name ${INSTANCE_PREFIX}backup_mongo \
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=backup_mongo \
-    -v $BACKUP_PATH/mongo:/backup --restart=unless-stopped \
+    -v $BACKUP_PATH/mongo:/backup:Z --restart=unless-stopped \
 	-e SGBD='mongodb' \
 	-e SENDER_EMAIL=$SENDER_EMAIL \
 	-e SENDER_EMAIL_PASS=$SENDER_EMAIL_PASS \
@@ -165,7 +165,7 @@ then
     podman create --name ${INSTANCE_PREFIX}retrieval \
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=retrieval \
-    -v $RETRIEVAL_PATH:/data/thumb \
+    -v $RETRIEVAL_PATH:/data/thumb:Z \
     -e RETRIEVAL_ENGINE=$RETRIEVAL_ENGINE \
     -e RETRIEVAL_PASSWORD=$RETRIEVAL_PASSWORD \
     --restart=unless-stopped \
@@ -181,7 +181,7 @@ then
     podman create --name ${INSTANCE_PREFIX}iipJP2 \
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=iipJP2 \
-    -v $IMS_STORAGE_PATH:$IMS_STORAGE_PATH \
+    -v $IMS_STORAGE_PATH:$IMS_STORAGE_PATH:Z \
     --privileged \
     -e NB_IIP_PROCESS=$NB_IIP_PROCESS \
     --restart=unless-stopped \
@@ -195,7 +195,7 @@ fi
 podman create --name ${INSTANCE_PREFIX}iipCyto \
 --network ${INSTANCE_PREFIX}biaflows-net \
 --network-alias=iipCyto \
--v $IMS_STORAGE_PATH:$IMS_STORAGE_PATH \
+-v $IMS_STORAGE_PATH:$IMS_STORAGE_PATH:Z \
 --privileged \
 -e NB_IIP_PROCESS=$NB_IIP_PROCESS \
 --restart=unless-stopped \
@@ -212,7 +212,7 @@ then
     podman create --name ${INSTANCE_PREFIX}bioformat \
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=bioformat \
-    -v $IMS_STORAGE_PATH:$IMS_STORAGE_PATH \
+    -v $IMS_STORAGE_PATH:$IMS_STORAGE_PATH:Z \
     -e BIOFORMAT_PORT=4321 \
     --restart=unless-stopped \
     $BIOFORMAT_NAMESPACE/bioformat:$BIOFORMAT_VERSION > /dev/null
@@ -229,8 +229,8 @@ then
     --network-alias=ims \
     -e IMS_STORAGE_PATH=$IMS_STORAGE_PATH \
     -e FAST_DATA_PATH=$IMS_STORAGE_PATH \
-    -v $IMS_STORAGE_PATH:$IMS_STORAGE_PATH \
-    -v $IMS_BUFFER_PATH:/tmp/uploaded \
+    -v $IMS_STORAGE_PATH:$IMS_STORAGE_PATH:Z \
+    -v $IMS_BUFFER_PATH:/tmp/uploaded:Z \
     --restart=unless-stopped \
     $IMS_NAMESPACE/ims:$IMS_VERSION > /dev/null
 
@@ -249,7 +249,7 @@ then
     podman create --name ${INSTANCE_PREFIX}core \
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=core \
-    -v /etc/localtime:/etc/localtime \
+    -v /etc/localtime:/etc/localtime:Z \
     --restart=unless-stopped \
     $CORE_NAMESPACE/core:$CORE_VERSION > /dev/null
 
@@ -272,7 +272,7 @@ then
     podman create --name ${INSTANCE_PREFIX}webUI \
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=webUI \
-    -v /etc/localtime:/etc/localtime \
+    -v /etc/localtime:/etc/localtime:Z \
     --restart=unless-stopped \
     $WEB_UI_NAMESPACE/web-ui:$WEB_UI_VERSION > /dev/null
 
@@ -292,7 +292,7 @@ then
     podman create --name ${INSTANCE_PREFIX}iris \
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=iris \
-    -v $IRIS_VOLUME:/var/lib/tomcat7/db \
+    -v $IRIS_VOLUME:/var/lib/tomcat7/db:Z \
     --restart=unless-stopped \
     $IRIS_NAMESPACE/iris:$IRIS_VERSION > /dev/null
 
@@ -306,8 +306,8 @@ fi
 podman create --name ${INSTANCE_PREFIX}nginx \
 --network ${INSTANCE_PREFIX}biaflows-net \
 --network-alias=nginx \
--v $IMS_BUFFER_PATH:/tmp/uploaded \
--v $CERTIFICATE_PATH:/certificates \
+-v $IMS_BUFFER_PATH:/tmp/uploaded:Z \
+-v $CERTIFICATE_PATH:/certificates:Z \
 -p $HTTP_NGINX_PORT:80 \
 -p $HTTPS_NGINX_PORT:443 \
 --restart=unless-stopped \
@@ -332,9 +332,9 @@ then
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=slurm \
     --privileged \
-    -v $SLURM_VOLUME:/var/lib/mysql \
-    -v $SERVER_SSHKEYS_PATH:$SERVER_SSHKEYS_PATH \
-    -v $SOFTWARE_podman_IMAGES_PATH:$SOFTWARE_podman_IMAGES_PATH \
+    -v $SLURM_VOLUME:/var/lib/mysql:Z \
+    -v $SERVER_SSHKEYS_PATH:$SERVER_SSHKEYS_PATH:Z \
+    -v $SOFTWARE_podman_IMAGES_PATH:$SOFTWARE_podman_IMAGES_PATH:Z \
     -e SERVER_SSHKEYS_FILE=$SERVER_SSHKEYS_FILE \
     -p 10022:22 \
     --restart=unless-stopped \
@@ -351,8 +351,8 @@ then
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=software_router \
     --privileged \
-    -v $SOFTWARE_podman_IMAGES_PATH:$SOFTWARE_podman_IMAGES_PATH \
-    -v $SERVER_SSHKEYS_PATH:$SERVER_SSHKEYS_PATH \
+    -v $SOFTWARE_podman_IMAGES_PATH:$SOFTWARE_podman_IMAGES_PATH:Z \
+    -v $SERVER_SSHKEYS_PATH:$SERVER_SSHKEYS_PATH:Z \
     --restart=unless-stopped \
     -p 22 \
     $SOFTWAREROUTER_NAMESPACE/software_router:$SOFTWAREROUTER_VERSION > /dev/null
