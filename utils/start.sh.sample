@@ -223,6 +223,7 @@ then
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=bioformat \
     -v $IMS_STORAGE_PATH:$IMS_STORAGE_PATH:Z,U \
+    --privileged \
     -e BIOFORMAT_PORT=4321 \
     --restart=unless-stopped \
     $BIOFORMAT_NAMESPACE/bioformat:$BIOFORMAT_VERSION > /dev/null
@@ -237,6 +238,7 @@ then
     podman create --name ${INSTANCE_PREFIX}ims \
     --network ${INSTANCE_PREFIX}biaflows-net \
     --network-alias=ims \
+    --privileged \
     -e IMS_STORAGE_PATH=$IMS_STORAGE_PATH \
     -e FAST_DATA_PATH=$IMS_STORAGE_PATH \
     -v $IMS_STORAGE_PATH:$IMS_STORAGE_PATH:Z,U \
