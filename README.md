@@ -14,6 +14,24 @@ This bootstrap procedure allows you to configure your installation and generate 
 All Cytomine components run in Docker containers so that the only requirement is Docker.
 But now we run through Podman, which can use Docker containers. However, you need to have Podman installed.
 
+## Podman
+
+This repo has been adjusted to use Podman instead of Docker. Note that "--link" is not implemented in Podman (and deprecated in Docker) and was replaced in this setup with a _network_ and _aliases_. 
+However to make _aliases_ work, you need to install an extra podman plugin first, 'dnsname':
+> git clone https://github.com/containers/dnsname.git
+
+> cd dnsname
+
+> sudo dnf install go
+
+> make binaries
+
+> make install PREFIX=/usr
+
+Now when you create a network, it will have _"dns_enabled: true"_ and allow aliases to communicate to other containers
+> podman network inspect \<name>
+
+
 
 ## Install
 
