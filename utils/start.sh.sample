@@ -56,10 +56,19 @@ echo ""
 
 # Create server SSH keys if needed
 SERVER_SSHKEYS_FILE="$SERVER_SSHKEYS_PATH/id_rsa"
+YUM_CMD=$(which yum)
+APT_GET_CMD=$(which apt-get)
+DNF_CMD=$(which dnf)
 if [ ! -e $SERVER_SSHKEYS_FILE ]
 then
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
-        apt-get install -y openssh-client
+        if [[ ! -z $APT_GET_CMD ]]; then
+            apt-get install -y openssh-client
+        elif [[ ! -z $YUM_CMD ]]; then
+            yum install -y openssh-clients
+        elif [[ ! -z $DNF_CMD ]]; then
+            dnf install -y openssh-clients
+        fi
     fi
     ssh-keygen -t rsa -m PEM -N "" -C $CORE_URL -f $SERVER_SSHKEYS_FILE
 fi
